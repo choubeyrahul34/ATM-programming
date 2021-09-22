@@ -4,20 +4,35 @@
 #include<math.h>
  
 //Functions
-
+float removed=0,added=0,balance=15000.00;
 void mainMenu();
 void checkBalance(float balance);
 float moneyDeposit(float balance);
 float moneyWithdraw(float balance);
 void menuExit();
 void errorMessage();
+void showrecipet(){
+  if (removed>0)
+  {
+    /* code */
+    printf("YOU HAVE WITHDRAW $%.2f\n IN YOUR LAST TRANSISTIONS FROM THIS ATM MACHINE/n",removed);
+  }
+  if (added>0)
+  {
+    /* code */
+    printf("YOU HAVE DEPOSIT $%.2f\n IN YOUR LAST TRANSISTIONS FROM THIS ATM MACHINE",added);
+  }
+  printf("AND NOW YOUR CURRENT BALANCE IS $%.2f\n",balance);
+
+}
+
  
  
 //Main Code
 int main() {
     //Local Declarations
     int option;
-    float balance = 15000.00;
+    // float balance = 15000.00;
     int choose;
 
     bool again = true;
@@ -106,6 +121,7 @@ float moneyDeposit(float balance) {
     printf("$$$$Your Balance is: $%.2f\n\n", balance);
     printf("**Enter your amount to Deposit\n");
     scanf("%f", &deposit);
+    added+=deposit;
  
  
     balance += deposit;
@@ -118,6 +134,7 @@ float moneyDeposit(float balance) {
 float moneyWithdraw(float balance) {
     float withdraw;
     bool back = true;
+
  
     printf("You choose to Withdraw a money\n");
     printf("$$$$Your Balance is: $%.2f\n\n", balance);
@@ -130,6 +147,8 @@ float moneyWithdraw(float balance) {
     if (withdraw < balance) {
         back = false;
         balance -= withdraw;
+        removed+=withdraw;
+        
         printf("\n$$$$Your withdrawing money is:  $%.2f\n", withdraw);
         printf("**Your New Balance is:   $%.2f\n\n", balance);
  
@@ -150,11 +169,13 @@ float moneyWithdraw(float balance) {
  
 void menuExit() {
     printf("--------------Take your receipt!!!------------------\n");
+    showrecipet();
     printf("-----Thank you for using ATM Banking Machine!!!-----\n");
     
  
 }//exit menu
- 
+
+
 void errorMessage() {;
     printf("+++!!!You selected invalid number!!!+++\n");
 }//error message
